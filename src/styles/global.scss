@@ -1,0 +1,32 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: linear-gradient(180deg, hsla(198, 76%, 52%, 1) 0%, hsla(236, 52%, 45%, 1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    max-width: 1120px;
+    margin: 0 auto;
+    
+    color: #fff;
+  }
+  
+  body, input, button, textarea {
+    font: 400 1rem "Roboto", sans-serif;
+  }
+  
+  /* media */
+  @media (max-width: 768px) {
+    html{
+    font-size: 93.75%;
+    }
+  }
+  @media (max-width: 425px) {
+    html{
+    font-size: 87.5%;
+    }
+  }
