@@ -9,20 +9,18 @@ interface AuthContextData {
 }
 
 interface userDataProps {
-    email: string;
-    senha: string;
+  email: string;
+  senha: string;
 }
 
-const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData
-);
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
 
   useEffect(() => {
-    const storagedUser = sessionStorage.getItem('@App:user');
-    const storagedToken = sessionStorage.getItem('@App:token');
+    const storagedUser = sessionStorage.getItem("@App:user");
+    const storagedToken = sessionStorage.getItem("@App:token");
 
     if (storagedToken && storagedUser) {
       setUser(storagedUser);
@@ -31,33 +29,38 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   async function Login(userData: userDataProps) {
-    const response = await api.post(process.env.REACT_APP_BASEURL+"/auth/login", userData);
+    const response = await api.post(
+      process.env.REACT_APP_BASEURL + "/auth/login",
+      userData
+    );
 
-    console.log(userData)
+    console.log(userData);
 
     setUser(userData.email);
     api.defaults.headers.Authorization = `Bearer ${response.data.access_token}`;
 
-    sessionStorage.setItem('@App:user', userData.email);
-    sessionStorage.setItem('@App:token', response.data.access_token);
+    sessionStorage.setItem("@App:user", userData.email);
+    sessionStorage.setItem("@App:token", response.data.access_token);
 
     console.log(response.data.user, response.data.access_token);
   }
 
   function Logout() {
-      sessionStorage.removeItem("@App:user");
-      sessionStorage.removeItem("@App:token");
+    sessionStorage.removeItem("@App:user");
+    sessionStorage.removeItem("@App:token");
   }
 
   return (
-    <AuthContext.Provider value={{ signed: Boolean(user), user, Login, Logout }}>
+    <AuthContext.Provider
+      value={{ signed: Boolean(user), user, Login, Logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
 export function useAuth() {
-    const context = useContext(AuthContext);
+  const context = useContext(AuthContext);
 
-    return context;
+  return context;
 }
