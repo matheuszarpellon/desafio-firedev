@@ -32,9 +32,10 @@
   }
 
   .logButton {
-    width: 6rem;
+    width: 7rem;
     height: 3rem;
     background: #fff;
+    font-size: 1.3rem;
     color: #373fae;
     border: 2px solid #373fae;
     border-radius: 0.8rem;
@@ -53,19 +54,29 @@
       flex-direction: column;
       width: 15rem;
       height: 15rem;
-      justify-content: center;
       align-items: center;
-      background: transparent;
       border: none;
+      background: transparent;
 
       &:hover {
         transform: scale(1.1);
       }
+      
+      .img-wrapper {
+        width: 10rem;
+        height: 10rem;
+        background-color: #fff;
+        border-radius: 50%;
+        position: relative;
 
-      img {
-        width: 65%;
-        margin-bottom: 1rem;
-        opacity: 0.9;
+        img {
+          position: absolute;
+          top: 1.8rem;
+          left: 1.8rem;
+          width: 65%;
+          height: 65%;
+          opacity: 0.9;
+        }
       }
 
       .title {

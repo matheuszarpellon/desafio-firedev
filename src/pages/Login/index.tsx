@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../contexts/auth";
 import { Header } from "../../components/Header";
 
 import "../../styles/home.scss";
+import "../../styles/loginForm.scss"
 
 export const Login: React.FC = () => {
   const { signed, Login } = useAuth();
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
 
   console.log(signed);
 
-  async function handleLogin() {
+  async function handleLogin(e: any) {
+    e.preventDefault();
+    
     await Login({
-      email: "guilherme@firedev.com.br",
-      password: "q7a4z1x2",
+      email,
+      password
     });
   }
   console.log(Login);
@@ -21,9 +26,27 @@ export const Login: React.FC = () => {
     <div className="container">
       <Header />
       <main>
-        <button className="logButton" onClick={handleLogin}>
-          Login
-        </button>
+        <form className="loginForm" onSubmit={handleLogin}>
+          <h2>Login</h2>
+          <label htmlFor="email">Insira o email:</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+          <label htmlFor="password">Insira a senha:</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+          
+          <button type="submit" className="logButton">Login</button>
+        </form>
       </main>
     </div>
   );

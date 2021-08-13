@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { api } from "../services/api";
 
-interface ListaServicosData {
+export interface ListaServicosData {
   id: number;
   nome: string;
   descricao: string | null;
@@ -18,8 +18,19 @@ interface ListaServicosData {
       created_at: string;
       updated_at: string;
       deleted_at: string | null;
+      sub_servicos: [
+        {
+          id: number;
+          nome: string;
+          descricao: string | null;
+          ervico_id: number | null;
+          created_at: string;
+          updated_at: string;
+          deleted_at: string | null;
+        }
+      ]
     }
-  ];
+  ]
 }
 
 const ListaServicosContext = createContext<ListaServicosData[]>([]);
